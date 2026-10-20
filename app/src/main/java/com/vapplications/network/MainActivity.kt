@@ -64,6 +64,13 @@ class MainActivity : Activity() {
         this.text = text; isAllCaps = false; textSize = 14f; setTextColor(Color.WHITE)
         background = GradientDrawable(GradientDrawable.Orientation.LEFT_RIGHT, intArrayOf(Color.rgb(39, 122, 204), Color.rgb(33, 170, 194))).apply { cornerRadius = dp(14).toFloat() }
         setOnClickListener { click() }
+        setOnTouchListener { view, event ->
+            when (event.actionMasked) {
+                android.view.MotionEvent.ACTION_DOWN -> view.animate().scaleX(.97f).scaleY(.97f).alpha(.82f).setDuration(90).start()
+                android.view.MotionEvent.ACTION_UP, android.view.MotionEvent.ACTION_CANCEL -> view.animate().scaleX(1f).scaleY(1f).alpha(1f).setDuration(160).start()
+            }
+            false
+        }
     }
     private fun buildUi() {
         val outer = android.widget.FrameLayout(this)
